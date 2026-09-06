@@ -42,7 +42,9 @@ Keep `?v=DEV` in source — never commit a SHA.
 3. Cloudflare DNS for `activecompute.co`, **DNS only (grey cloud)** until the certificate issues:
    - `A` `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `CNAME` `www` → `activecompute.github.io`
-4. Settings → Pages → Custom domain `activecompute.co` → wait for the check → **Enforce HTTPS**.
+4. Settings → Pages → Custom domain `activecompute.co` → wait for the DNS check → **Enforce HTTPS**.
+   (With a GitHub Actions deployment the `CNAME` file is ignored — the domain is set here. The
+   file stays in the repo only as a fallback for branch publishing.)
 5. Optional afterwards: flip Cloudflare to proxied with SSL mode **Full**.
 
 ## Conventions
