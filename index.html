@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════
+     CONFIG — the things that change. Everything else is layout.
+       • The letter:      <article class="letter"> below, marked LETTER START / LETTER END.
+       • GitHub URL:      the footer link marked CONFIG:GITHUB.
+       • Email address:   the footer link marked CONFIG:EMAIL (hidden until set).
+       • Sticky-note line: CONFIG at the top of script.js.
+     Assets carry ?v=DEV; the deploy workflow stamps the git SHA in their place.
+     ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<title>Active Compute Co. — Make your compute work for you.</title>
+<meta name="description" content="Active Compute Co. is a software company building more active, personal, and adaptable software — software that understands what you are trying to accomplish and does useful work on your behalf. Read our founding note.">
+<link rel="canonical" href="https://activecompute.co/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Active Compute Co.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#efefef">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151619">
+<meta name="color-scheme" content="light dark">
+
+<!-- Open Graph (WhatsApp, Telegram, iMessage, LinkedIn, Slack) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Active Compute Co.">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://activecompute.co/">
+<meta property="og:title" content="Active Compute Co.">
+<meta property="og:description" content="Make your compute work for you. A founding note from a software company building more active, personal, and adaptable software that works on your behalf.">
+<meta property="og:image" content="https://activecompute.co/assets/og-image.jpg?v=DEV">
+<meta property="og:image:secure_url" content="https://activecompute.co/assets/og-image.jpg?v=DEV">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Active Compute Co. — Make your compute work for you.">
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Active Compute Co.">
+<meta name="twitter:description" content="Make your compute work for you. A founding note from a software company building more active, personal, and adaptable software that works on your behalf.">
+<meta name="twitter:image" content="https://activecompute.co/assets/og-image.jpg?v=DEV">
+<meta name="twitter:image:alt" content="Active Compute Co. — Make your compute work for you.">
+
+<!-- Icons -->
+<link rel="icon" href="/favicon.ico?v=DEV" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=DEV">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png?v=DEV">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=DEV">
+<link rel="manifest" href="/site.webmanifest?v=DEV">
+
+<!-- Structured data (SEO / answer engines) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://activecompute.co/#organization",
+      "name": "Active Compute Co.",
+      "alternateName": ["Active Compute", "ActiveCompute"],
+      "url": "https://activecompute.co/",
+      "logo": { "@type": "ImageObject", "url": "https://activecompute.co/assets/icon-512.png", "width": 512, "height": 512 },
+      "image": "https://activecompute.co/assets/og-image.jpg",
+      "slogan": "Make your compute work for you.",
+      "description": "Active Compute Co. is a software company building more active, personal, and adaptable software that understands what people are trying to accomplish, coordinates the pieces around them, and does useful work on their behalf.",
+      "foundingDate": "2026",
+      "sameAs": ["https://github.com/activecompute"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://activecompute.co/#website",
+      "url": "https://activecompute.co/",
+      "name": "Active Compute Co.",
+      "publisher": { "@id": "https://activecompute.co/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://activecompute.co/#webpage",
+      "url": "https://activecompute.co/",
+      "name": "Active Compute Co. — Make your compute work for you.",
+      "isPartOf": { "@id": "https://activecompute.co/#website" },
+      "about": { "@id": "https://activecompute.co/#organization" },
+      "primaryImageOfPage": "https://activecompute.co/assets/og-image.jpg",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://activecompute.co/#note",
+      "headline": "A Note from Active Compute Co.",
+      "description": "Why we think compute should become active: software that understands context, coordinates the pieces around us, and does useful work on our behalf — while staying personal, composable, accessible, delightful, and magical.",
+      "author": { "@id": "https://activecompute.co/#organization" },
+      "publisher": { "@id": "https://activecompute.co/#organization" },
+      "mainEntityOfPage": { "@id": "https://activecompute.co/#webpage" },
+      "datePublished": "2026-09-05",
+      "dateModified": "2026-09-05",
+      "image": "https://activecompute.co/assets/og-image.jpg",
+      "keywords": ["Active Compute", "Active Compute Co.", "active software", "personal software", "composable software", "AI agents", "software company"],
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+
+<!-- Fonts: Cormorant Garamond 700 (wordmark) · Inter 400/600 (tagline, letter) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=DEV">
+
+<!-- Theme before first paint: a remembered choice wins, otherwise the system decides. -->
+<script>
+(function () {
+	try {
+		var t = localStorage.getItem("ac-theme");
+		if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+	} catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<!-- SPRITE:START --><!-- Lucide (ISC) + Simple Icons GitHub mark (CC0). Symbols are inlined so the page needs no icon CDN. -->
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="i-paint-bucket" viewBox="0 0 24 24"><path d="M11 7 6 2"/><path d="M18.992 12H2.041"/><path d="M21.145 18.38A3.34 3.34 0 0 1 20 16.5a3.3 3.3 0 0 1-1.145 1.88c-.575.46-.855 1.02-.855 1.595A2 2 0 0 0 20 22a2 2 0 0 0 2-2.025c0-.58-.285-1.13-.855-1.595"/><path d="m8.5 4.5 2.148-2.148a1.205 1.205 0 0 1 1.704 0l7.296 7.296a1.205 1.205 0 0 1 0 1.704l-7.592 7.592a3.615 3.615 0 0 1-5.112 0l-3.888-3.888a3.615 3.615 0 0 1 0-5.112L5.67 7.33"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="i-sticky-note" viewBox="0 0 24 24"><path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"/><path d="M15 3v5a1 1 0 0 0 1 1h5"/></symbol><symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol><symbol id="i-align-left" viewBox="0 0 24 24"><path d="M21 5H3"/><path d="M15 12H3"/><path d="M17 19H3"/></symbol><symbol id="i-align-center" viewBox="0 0 24 24"><path d="M21 5H3"/><path d="M17 12H7"/><path d="M19 19H5"/></symbol><symbol id="i-align-right" viewBox="0 0 24 24"><path d="M21 5H3"/><path d="M21 12H9"/><path d="M21 19H7"/></symbol><symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol></svg>
+<!-- SPRITE:END -->
+
+<main class="page">
+
+	<header class="masthead">
+		<a href="/" aria-label="Active Compute Co."><span class="ac-wordmark">Active Compute Co.</span></a>
+	</header>
+
+	<div class="stage" id="stage">
+		<article class="card is-arriving" id="card" tabindex="0" aria-label="A Note from Active Compute Co.">
+			<div class="grip" aria-hidden="true" title="Hold to move the card"></div>
+			<i class="bracket tl" aria-hidden="true"></i><i class="bracket tr" aria-hidden="true"></i>
+			<i class="bracket bl" aria-hidden="true"></i><i class="bracket br" aria-hidden="true"></i>
+
+			<!-- ═══════════════ LETTER START ═══════════════ -->
+			<div class="letter" id="letter">
+				<h1 id="letter-title">A Note from Active Compute Co.</h1>
+
+				<p>We spend too much time making our tools work for us, and not enough time focused on the work itself. We move information between applications, hunt through tabs, recreate context, and repeat things our software should probably already understand. The tools are often excellent; it is the space between them where work breaks down.</p>
+
+				<p>We think that relationship should change. Software should do more than give us tools to operate. It should understand what we are trying to accomplish, coordinate the pieces around us, and do useful work on our behalf. <strong>We think compute should become active.</strong></p>
+
+				<h2>AI made software more capable. It did not automatically make work better.</h2>
+
+				<p>AI has expanded what software can do, but it often arrives as another chat window, AI assistants, or an application that needs us to supply context, connect the pieces, and move its output somewhere useful. Individual tasks can become faster while the work around them remains fragmented. <strong>Putting AI inside the old way of working is not enough.</strong> The opportunity is to rethink the environment around work, so intelligence reduces the machinery we operate rather than adding to it.</p>
+
+				<h2>Powerful technology should work for everyone.</h2>
+
+				<p>Getting real value from AI should not depend on knowing how to connect models, code, and agents. Too often, the choice feels like powerful but complicated tools, or accessible features that only touch a small part of the work. We want to close the gap between what this technology can do and what people can actually put to use, without expecting everyone to become a developer or an AI expert.</p>
+
+				<h2>Make work human again.</h2>
+
+				<p>Desks, folders, notes, and windows gave work a sense of place. As more work moved online, much of that structure dissolved into tabs: documents, email, design, communication, and now AI. We gained easier access and collaboration, but still carry the burden of keeping everything connected. Making work human again means giving people back clarity, control, and room to think. Software should handle more of the coordination so we can focus on creating, deciding, collaborating, and doing the work itself.</p>
+
+				<h2>Software should feel like yours.</h2>
+
+				<p>We miss software with personality: recognizable interfaces, Winamp skins, and working environments people could make their own. Too much software now feels interchangeable, with the same white surfaces, gray navigation, and rounded cards. Consistency is useful, but it should not mean losing character or the freedom to customize. Serious software can be powerful and enjoyable. People should be able to shape not just what their software does, but how it looks and feels.</p>
+
+				<p>We want software that is:</p>
+
+				<ul>
+					<li><strong>Active</strong>, capable of understanding context, coordinating actions, and doing useful work rather than simply waiting to be operated.</li>
+					<li><strong>Personal</strong>, able to adapt to the way you work instead of forcing you into someone else's workflow.</li>
+					<li><strong>Composable</strong>, where tools, information, intelligence, and workflows can naturally work together.</li>
+					<li><strong>Accessible</strong>, so powerful capabilities are available to ordinary people, not just those willing to become developers or AI experts.</li>
+					<li><strong>Delightful</strong>, because software we spend our lives using should have character, invite exploration, and sometimes even be fun.</li>
+					<li><strong>Magical</strong>, making things that once felt out of reach surprisingly easy, so people experience the power of AI through what they can actually accomplish.</li>
+				</ul>
+
+				<h2>What we are building</h2>
+
+				<p>We are hard at work on our first product, bringing tools and context together, making repetitive work easier to automate, and helping people create, customize, and share capabilities shaped around their needs. Just as importantly, people should be able to see what the software has access to, understand what it is doing, and control how it acts on their behalf.</p>
+
+				<p>That is what <strong>Active Compute</strong> means to us. <strong>Active</strong> means software that understands context, adapts, coordinates, and acts rather than simply waiting to be operated. <strong>Compute</strong> is the foundation underneath: running applications, maintaining context, and continuing workflows in the cloud when needed, even when you step away. Together, they turn software from tools you constantly operate into systems that work for you.</p>
+			</div>
+			<!-- ═══════════════ LETTER END ═══════════════ -->
+
+			<footer class="signoff">
+				<div class="ac-signature">
+					<span class="ac-wordmark">Active Compute Co.</span>
+					<span class="ac-tagline">Make your compute work for you.</span>
+				</div>
+			</footer>
+		</article>
+	</div>
+
+	<!-- The card bar: name chip · Fill · Align ▾ · Download ▾ · Copy ▾ │ More │ Close -->
+	<div class="card-bar" id="card-bar" role="toolbar" aria-label="Card bar" hidden>
+		<button class="bar-btn name-chip" id="name-chip" type="button" title="Rename the card">
+			<svg class="icon" aria-hidden="true"><use href="#i-file-text"/></svg>
+			<span class="label" id="name-label">A Note from Active Compute Co.</span>
+		</button>
+
+		<div class="slot" data-slot="fill">
+			<button class="bar-btn" type="button" data-popover="fill" title="Fill" aria-haspopup="true" aria-expanded="false">
+				<svg class="icon" aria-hidden="true"><use href="#i-paint-bucket"/></svg>
+			</button>
+			<div class="popover swatches" id="pop-fill" role="menu" aria-label="Fill" hidden>
+				<button class="swatch none is-current" type="button" role="menuitemradio" aria-checked="true" data-fill="none" title="None"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="neutral" title="Neutral" style="--sw:#8c94a0"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="lavender" title="Lavender" style="--sw:#a58ee0"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="mint" title="Mint" style="--sw:#7fc39a"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="sky" title="Sky" style="--sw:#7db4e0"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="sand" title="Sand" style="--sw:#d9b878"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="pink" title="Pink" style="--sw:#dd94bb"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="teal" title="Teal" style="--sw:#82c7c7"></button>
+				<button class="swatch" type="button" role="menuitemradio" aria-checked="false" data-fill="coral" title="Coral" style="--sw:#e39a86"></button>
+			</div>
+		</div>
+
+		<div class="slot" data-slot="align">
+			<button class="bar-btn" type="button" data-popover="align" title="Align — left" aria-haspopup="true" aria-expanded="false">
+				<svg class="icon" aria-hidden="true"><use id="align-icon" href="#i-align-left"/></svg>
+			</button>
+			<div class="popover" id="pop-align" role="menu" aria-label="Align" hidden>
+				<button class="menu-row" type="button" role="menuitemradio" aria-checked="true" data-align="left"><svg class="icon" aria-hidden="true"><use href="#i-align-left"/></svg><span class="grow">Left</span><svg class="icon check" aria-hidden="true"><use href="#i-check"/></svg></button>
+				<button class="menu-row" type="button" role="menuitemradio" aria-checked="false" data-align="center"><svg class="icon" aria-hidden="true"><use href="#i-align-center"/></svg><span class="grow">Center</span><svg class="icon check" aria-hidden="true" hidden><use href="#i-check"/></svg></button>
+				<button class="menu-row" type="button" role="menuitemradio" aria-checked="false" data-align="right"><svg class="icon" aria-hidden="true"><use href="#i-align-right"/></svg><span class="grow">Right</span><svg class="icon check" aria-hidden="true" hidden><use href="#i-check"/></svg></button>
+			</div>
+		</div>
+
+		<div class="slot" data-slot="download">
+			<button class="bar-btn" type="button" data-popover="download" title="Download" aria-haspopup="true" aria-expanded="false">
+				<svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+			</button>
+			<div class="popover" id="pop-download" role="menu" aria-label="Download" hidden>
+				<button class="menu-row" type="button" role="menuitem" data-action="download-md"><svg class="icon" aria-hidden="true"><use href="#i-file-text"/></svg><span class="grow">Markdown (.md)</span></button>
+				<button class="menu-row" type="button" role="menuitem" data-action="download-pdf"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg><span class="grow">PDF</span></button>
+			</div>
+		</div>
+
+		<div class="slot" data-slot="copy">
+			<button class="bar-btn" type="button" id="copy-btn" data-popover="copy" title="Copy" aria-haspopup="true" aria-expanded="false">
+				<svg class="icon" aria-hidden="true"><use id="copy-icon" href="#i-copy"/></svg>
+			</button>
+			<div class="popover" id="pop-copy" role="menu" aria-label="Copy" hidden>
+				<button class="menu-row" type="button" role="menuitem" data-action="copy-text"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg><span class="grow">Copy text</span></button>
+				<button class="menu-row" type="button" role="menuitem" data-action="copy-md"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="grow">Copy as Markdown</span></button>
+			</div>
+		</div>
+
+		<span class="bar-divider" aria-hidden="true"></span>
+
+		<div class="slot" data-slot="more">
+			<button class="bar-btn" type="button" data-popover="more" title="More — the card's menu" aria-haspopup="true" aria-expanded="false">
+				<svg class="icon" aria-hidden="true"><use href="#i-ellipsis"/></svg>
+			</button>
+			<div class="popover align-end" id="pop-more" role="menu" aria-label="More" hidden>
+				<button class="menu-row" type="button" role="menuitem" data-action="rename"><svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg><span class="grow">Rename…</span></button>
+				<button class="menu-row" type="button" role="menuitem" data-action="reset"><svg class="icon" aria-hidden="true"><use href="#i-rotate-ccw"/></svg><span class="grow">Reset canvas</span></button>
+			</div>
+		</div>
+
+		<span class="bar-divider" aria-hidden="true"></span>
+
+		<button class="bar-btn" type="button" id="close-btn" title="Remove from the canvas — undo restores it">
+			<svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+		</button>
+	</div>
+
+	<footer class="footer">
+		<!-- CONFIG:GITHUB -->
+		<a href="https://github.com/activecompute" rel="me noopener" target="_blank">
+			<svg class="icon" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-github"/></svg>GitHub
+		</a>
+		<!-- CONFIG:EMAIL — set the address after "mailto:"; the link stays hidden while it is empty. -->
+		<a href="mailto:">
+			<svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Email
+		</a>
+		<span class="spacer"></span>
+		<span class="copy">© 2026 Active Compute Co.</span>
+		<button class="theme-toggle" id="theme-toggle" type="button" title="Theme: system" aria-label="Theme: system. Click to change.">
+			<svg class="icon" data-mode="system" aria-hidden="true"><use href="#i-monitor"/></svg>
+			<svg class="icon" data-mode="light" aria-hidden="true"><use href="#i-sun"/></svg>
+			<svg class="icon" data-mode="dark" aria-hidden="true"><use href="#i-moon"/></svg>
+		</button>
+	</footer>
+
+</main>
+
+<script src="script.js?v=DEV"></script>
+</body>
+</html>
