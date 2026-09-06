@@ -5,9 +5,11 @@
 # Pages, so it runs here instead). Source stays `?v=DEV`; never commit a SHA.
 name: Deploy to GitHub Pages
 
+# PARKED 2026-09-06: the activecompute org has Pages creation disabled for members, so this
+# workflow cannot deploy yet. The site ships to Cloudflare Pages via ./deploy.sh instead.
+# When an org owner allows Pages (Org Settings → Member privileges → Pages creation → Public),
+# restore the `push` trigger below and enable Pages on the repo with Source = GitHub Actions.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -29,23 +29,28 @@ time, so there is exactly one copy of the letter to maintain.
 
 ## Deploy
 
-Hosted on **GitHub Pages** from this repo (`activecompute/activecompute.github.io`), custom
-domain `activecompute.co` (`CNAME`). Pushing to `main` runs `.github/workflows/pages.yml`,
-which stamps every `?v=DEV` in `index.html` with the git short SHA and publishes.
+Hosted on **Cloudflare Pages** — project `activecompute`, direct upload, domain `activecompute.co`
+(DNS is on the same Cloudflare account, so the custom domain and its certificate are automatic).
 
-Keep `?v=DEV` in source — never commit a SHA.
+```bash
+bash deploy.sh
+```
 
-### One-time setup (not yet done)
+`deploy.sh` refuses to run with uncommitted changes (the version stamp comes from `git rev-parse`),
+stages the site into `_site/`, rewrites every `?v=DEV` in `index.html` to the git short SHA, and
+uploads with `wrangler pages deploy`. Keep `?v=DEV` in source — never commit a SHA.
 
-1. Create the repo `activecompute/activecompute.github.io` as **public** and push `main`.
-2. Repo → Settings → Pages → Source: **GitHub Actions**.
-3. Cloudflare DNS for `activecompute.co`, **DNS only (grey cloud)** until the certificate issues:
-   - `A` `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `CNAME` `www` → `activecompute.github.io`
-4. Settings → Pages → Custom domain `activecompute.co` → wait for the DNS check → **Enforce HTTPS**.
-   (With a GitHub Actions deployment the `CNAME` file is ignored — the domain is set here. The
-   file stays in the repo only as a fallback for branch publishing.)
-5. Optional afterwards: flip Cloudflare to proxied with SSL mode **Full**.
+One-time per machine: `npx wrangler login` (browser OAuth). The always-current preview is
+https://activecompute.pages.dev/.
+
+### GitHub Pages — parked
+
+`.github/workflows/pages.yml` is the GitHub Pages deploy and is complete, but the `activecompute`
+org has **Pages creation disabled for members**, so it is `workflow_dispatch`-only for now. To move
+hosting there later: an org owner allows Pages (Org Settings → Member privileges → Pages creation →
+Public), enable Pages on this repo with Source = **GitHub Actions**, restore the `push` trigger,
+set the custom domain in Settings → Pages, and repoint DNS to GitHub's A/AAAA records (grey cloud
+until the certificate issues).
 
 ## Conventions
 
