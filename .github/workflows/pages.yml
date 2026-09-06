@@ -32,7 +32,7 @@ jobs:
         run: |
           SHA="$(git rev-parse --short HEAD)"
           mkdir -p _site
-          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'README.md' --exclude '.claude' ./ _site/
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'README.md' --exclude '.claude' --exclude 'serve.py' ./ _site/
           sed -i "s/?v=DEV/?v=${SHA}/g" _site/index.html
           echo "stamped ?v=${SHA}"
           grep -c "?v=${SHA}" _site/index.html

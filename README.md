@@ -6,10 +6,12 @@ company's canvas. Static HTML, no build step, no backend.
 ## Run locally
 
 ```bash
-python3 -m http.server 4185
+python3 serve.py
 ```
 
-Then open http://localhost:4185/ (root-absolute asset paths need a server, not `file://`).
+Then open http://localhost:4185/. `serve.py` is python's `http.server` with `Cache-Control: no-store`,
+because `?v=DEV` never changes locally and Chrome would otherwise cache an edited `styles.css` or
+`script.js`. (Root-absolute asset paths need a server, not `file://`.)
 
 ## Where to change things
 
