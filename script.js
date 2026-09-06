@@ -329,7 +329,8 @@ $$("[data-action]", bar).forEach((row) => {
 	const sig = $(".ac-signature", signoff);
 	if (!sig) return;
 	const toggle = () => {
-		const on = signoff.classList.toggle("is-signed");
+		// The line lives in the card's bottom band, so the state sits on the card.
+		const on = card.classList.toggle("is-signed");
 		sig.setAttribute("aria-expanded", on ? "true" : "false");
 	};
 	sig.addEventListener("click", toggle);

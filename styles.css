@@ -138,7 +138,9 @@ body.is-panning { cursor: grabbing; user-select: none; }
 	color: var(--card-fg);
 	border-radius: 14px;
 	box-shadow: var(--shadow-card);
-	padding: clamp(28px, 6vw, 64px) clamp(22px, 6vw, 64px) clamp(28px, 5vw, 52px);
+	/* Bottom padding is deeper than the sides: it is the band the "Made with ♥" line
+	   reveals into (see .signed-by), so the reveal never has to make room. */
+	padding: clamp(28px, 6vw, 64px) clamp(22px, 6vw, 64px) clamp(56px, 7vw, 76px);
 	outline: none;
 	transform: translate(var(--dx, 0px), var(--dy, 0px));
 	will-change: transform;
@@ -218,21 +220,30 @@ body.is-panning { cursor: grabbing; user-select: none; }
 }
 .signoff .ac-signature { font-size: clamp(1.5rem, 3.4vw, 2.125rem); position: relative; cursor: pointer; outline: none; }
 .signoff .ac-signature:focus-visible { outline: 2px solid var(--selection); outline-offset: 6px; border-radius: 2px; }
-/* The people behind the mark. Absolutely placed under the tagline so revealing it moves
-   nothing; transform + opacity only, ≤ 500 ms. */
+/* "Made with ♥ by …" — the people behind the mark. Lives in the card's bottom band,
+   centered, absolutely placed so revealing it moves nothing; transform + opacity only,
+   ≤ 500 ms. The card's bottom padding reserves the room (see .card). */
 .signed-by {
-	position: absolute; top: 100%; left: 0; margin-top: 0.55rem;
-	font-family: "Inter", Arial, sans-serif; font-size: 0.8125rem; font-weight: 400;
-	letter-spacing: 0.01em; line-height: 1.5; white-space: nowrap;
-	color: var(--muted-fg);
+	position: absolute; left: 0; right: 0; bottom: clamp(14px, 2vw, 24px); margin: 0;
+	padding-inline: clamp(16px, 4vw, 40px);
+	display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25em 0.4em;
+	font-family: "Inter", Arial, sans-serif; font-size: 1rem; font-weight: 600;
+	letter-spacing: 0.01em; line-height: 1.5; text-align: center;
+	color: var(--card-fg);
 	opacity: 0; transform: translateY(6px); visibility: hidden;
 	transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out), visibility 0s linear 280ms;
 }
-.signoff.is-signed .signed-by { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
-.signed-by .dot { margin: 0 0.45em; opacity: 0.6; }
-.letter[style*="--align: center"] ~ .signoff .signed-by { left: 50%; transform: translate(-50%, 6px); }
-.letter[style*="--align: center"] ~ .signoff.is-signed .signed-by { transform: translate(-50%, 0); }
-.letter[style*="--align: right"] ~ .signoff .signed-by { left: auto; right: 0; }
+.card.is-signed .signed-by { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.signed-by .made { display: inline-flex; align-items: center; gap: 0.3em; }
+.signed-by .heart { width: 1em; height: 1em; fill: #c23d4b; stroke: #c23d4b; stroke-width: 1.5; transform-origin: center; }
+.card.is-signed .heart { animation: beat 480ms var(--ease-out) 140ms both; }
+@keyframes beat { 0% { transform: scale(1); } 35% { transform: scale(1.3); } 62% { transform: scale(0.94); } 100% { transform: scale(1); } }
+.signed-by .dot { margin: 0 0.45em; opacity: 0.55; font-weight: 400; }
+/* Narrow: the line wraps to two rows, so the band below the sign-off grows with it. */
+@media (max-width: 480px) {
+	.signed-by { font-size: 0.9375rem; }
+	.card { padding-bottom: 84px; }
+}
 
 /* Source flyout (More → Source): the card's provenance, as the app draws it. */
 .popover.source { min-width: 200px; padding: 10px 12px 9px; cursor: default; }
