@@ -216,7 +216,29 @@ body.is-panning { cursor: grabbing; user-select: none; }
 	max-width: 62ch;
 	margin-inline: auto;
 }
-.signoff .ac-signature { font-size: clamp(1.5rem, 3.4vw, 2.125rem); }
+.signoff .ac-signature { font-size: clamp(1.5rem, 3.4vw, 2.125rem); position: relative; cursor: pointer; outline: none; }
+.signoff .ac-signature:focus-visible { outline: 2px solid var(--selection); outline-offset: 6px; border-radius: 2px; }
+/* The people behind the mark. Absolutely placed under the tagline so revealing it moves
+   nothing; transform + opacity only, ≤ 500 ms. */
+.signed-by {
+	position: absolute; top: 100%; left: 0; margin-top: 0.55rem;
+	font-family: "Inter", Arial, sans-serif; font-size: 0.8125rem; font-weight: 400;
+	letter-spacing: 0.01em; line-height: 1.5; white-space: nowrap;
+	color: var(--muted-fg);
+	opacity: 0; transform: translateY(6px); visibility: hidden;
+	transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out), visibility 0s linear 280ms;
+}
+.signoff.is-signed .signed-by { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.signed-by .dot { margin: 0 0.45em; opacity: 0.6; }
+.letter[style*="--align: center"] ~ .signoff .signed-by { left: 50%; transform: translate(-50%, 6px); }
+.letter[style*="--align: center"] ~ .signoff.is-signed .signed-by { transform: translate(-50%, 0); }
+.letter[style*="--align: right"] ~ .signoff .signed-by { left: auto; right: 0; }
+
+/* Source flyout (More → Source): the card's provenance, as the app draws it. */
+.popover.source { min-width: 200px; padding: 10px 12px 9px; cursor: default; }
+.source-head { font-size: 0.75rem; color: var(--muted-fg); letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 4px; }
+.source-name { font-size: 0.875rem; font-weight: 600; line-height: 1.5; }
+.source-meta { font-size: 0.75rem; color: var(--muted-fg); margin-top: 5px; }
 .letter[style*="--align: center"] ~ .signoff { --ac-signature-align: center; --ac-tagline-align: center; text-align: center; }
 .letter[style*="--align: right"] ~ .signoff { --ac-signature-align: flex-end; --ac-tagline-align: right; text-align: right; }
 
@@ -252,6 +274,8 @@ body.is-panning { cursor: grabbing; user-select: none; }
 	fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* `.icon` sets display:block, which outranks the UA's [hidden] rule — restore it. */
+[hidden] { display: none !important; }
 
 /* ── Card bar (Expand │ middle │ AI · More │ Close — text: no Expand, no AI) ─────── */
 .card-bar {

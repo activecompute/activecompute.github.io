@@ -173,17 +173,20 @@ function closePopovers() {
 	btn.setAttribute("aria-expanded", "false");
 	openPopover = null;
 }
+function openPop(pop, btn) {
+	closePopovers();
+	pop.hidden = false;
+	btn.classList.add("is-active");
+	btn.setAttribute("aria-expanded", "true");
+	openPopover = { pop, btn };
+	const first = $("[role^=menuitem]", pop);
+	if (first && !window.matchMedia("(pointer: coarse)").matches) first.focus({ preventScroll: true });
+}
 $$("[data-popover]", bar).forEach((btn) => {
 	const pop = $(`#pop-${btn.dataset.popover}`);
 	btn.addEventListener("click", () => {
 		if (openPopover && openPopover.pop === pop) return closePopovers();
-		closePopovers();
-		pop.hidden = false;
-		btn.classList.add("is-active");
-		btn.setAttribute("aria-expanded", "true");
-		openPopover = { pop, btn };
-		const first = $("[role^=menuitem]", pop);
-		if (first && !window.matchMedia("(pointer: coarse)").matches) first.focus({ preventScroll: true });
+		openPop(pop, btn);
 	});
 });
 document.addEventListener("pointerdown", (e) => {
@@ -315,8 +318,28 @@ $$("[data-action]", bar).forEach((row) => {
 		else if (action === "copy-md") copy(letterMarkdown());
 		else if (action === "rename") startRename();
 		else if (action === "reset") resetCanvas();
+		// Source — the card's provenance flyout, hung off the More slot like the app's.
+		else if (action === "source") openPop($("#pop-source"), $("[data-popover=more]", bar));
 	});
 });
+
+// ── The signature signs: click the sign-off and the people behind the mark appear ─
+(function signature() {
+	const signoff = $(".signoff");
+	const sig = $(".ac-signature", signoff);
+	if (!sig) return;
+	const toggle = () => {
+		const on = signoff.classList.toggle("is-signed");
+		sig.setAttribute("aria-expanded", on ? "true" : "false");
+	};
+	sig.addEventListener("click", toggle);
+	sig.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			toggle();
+		}
+	});
+})();
 
 // ── Name chip: rename the card (and the tab) ──────────────────────────────────────
 const nameChip = $("#name-chip");
