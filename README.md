@@ -63,7 +63,8 @@ not appear again.
 `not_found_handling` is `"404-page"`, which serves the nearest `404.html` in the asset directory.
 The repo has none, so a mistyped URL currently returns a bare 404 with an empty body. The setting is
 the right destination, not a mistake: drop a `404.html` in the repo root and it starts working with
-no config change. Designing that page is its own task.
+no config change. Designing that page is
+[issue #3](https://github.com/activecompute/activecompute.github.io/issues/3).
 
 ### Hosting history
 

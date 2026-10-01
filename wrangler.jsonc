@@ -42,7 +42,7 @@
 		// `"none"`. Someone who mistypes a URL gets a blank page with no branding and
 		// no way back. The setting is kept because it is the correct destination: drop
 		// a `404.html` in the repo root and it starts working with no config change.
-		// Designing that page is tracked separately.
+		// Designing that page is issue #3.
 		"not_found_handling": "404-page"
 	},
 
