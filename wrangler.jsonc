@@ -1,0 +1,49 @@
+{
+	"$schema": "https://unpkg.com/wrangler/config-schema.json",
+	"name": "activecompute-site",
+	"compatibility_date": "2026-09-30",
+
+	// **An assets-only Worker: there is deliberately no `main`.**
+	//
+	// Wrangler accepts a Worker with `assets` and no script, and serves the
+	// directory straight from Cloudflare's edge. The site is static — HTML, CSS,
+	// one script, some images — so a Worker script would only add a hop and a
+	// thing to break. If this ever needs real request handling (a redirect rule, a
+	// form endpoint), add `main` then and not before.
+	//
+	// Replaced Cloudflare Pages on 2026-10-01. Pages is no longer the path for new
+	// work — static sites are Workers with static assets. See README.md.
+	"assets": {
+		// Built by deploy.sh, never committed: it is the repo with `?v=DEV` stamped
+		// to the git short SHA. Deploying the repo root instead would ship the
+		// literal string `?v=DEV` and break cache-busting for everyone.
+		"directory": "./_site",
+
+		// A 404 serves the site's own page rather than Cloudflare's. `single-page-
+		// application` would be wrong here — this is a multi-file static site, not
+		// a client-routed app, and rewriting every miss to index.html would turn a
+		// typo'd URL into a 200 and hide broken links from us and from crawlers.
+		"not_found_handling": "404-page"
+	},
+
+	// Both hostnames, as Custom Domains, so Cloudflare owns the DNS records and the
+	// certificates. The apex and `www` are separate records and both must be
+	// claimed, or whichever is left over keeps resolving to nothing.
+	//
+	// Universal SSL covers the apex and one label, so both of these are covered
+	// without Advanced Certificate Manager.
+	"routes": [
+		{ "pattern": "activecompute.co", "custom_domain": true },
+		{ "pattern": "www.activecompute.co", "custom_domain": true }
+	],
+
+	// Stated rather than inherited. Wrangler derives `workers_dev` from whether any
+	// routes exist, so a config that merely *has* routes gets the behaviour we want
+	// by accident and loses it the moment someone comments a route out. Writing both
+	// out means the site is reachable at its own two hostnames and nowhere else, and
+	// a future edit that would expose a second origin has to say so explicitly.
+	"workers_dev": false,
+	"preview_urls": false,
+
+	"observability": { "enabled": true }
+}
