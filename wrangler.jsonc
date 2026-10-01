@@ -3,6 +3,19 @@
 	"name": "activecompute-site",
 	"compatibility_date": "2026-09-30",
 
+	// **Pinned, because account ambiguity is what took this site down.**
+	// Wrangler resolves the target account in this order: an explicit `account_id`,
+	// then `CLOUDFLARE_ACCOUNT_ID`, then whatever is cached in `.wrangler/cache/`.
+	// That cache used to be committed to this repo and held the OLD account — the one
+	// the Pages project stayed behind in and the one the `activecompute.co` zone is
+	// NOT in — so a deploy would have silently targeted it, failed to claim the
+	// Custom Domains, and left the apex exactly as broken as before.
+	//
+	// This is the Active Compute account, which holds the zone, the Orkestra update
+	// feed and the platform Workers. An account id is an identifier, not a credential;
+	// this is the documented place for it.
+	"account_id": "4afc1c7797b5242e40838466702cd168",
+
 	// **An assets-only Worker: there is deliberately no `main`.**
 	//
 	// Wrangler accepts a Worker with `assets` and no script, and serves the
@@ -19,10 +32,17 @@
 		// literal string `?v=DEV` and break cache-busting for everyone.
 		"directory": "./_site",
 
-		// A 404 serves the site's own page rather than Cloudflare's. `single-page-
-		// application` would be wrong here — this is a multi-file static site, not
-		// a client-routed app, and rewriting every miss to index.html would turn a
-		// typo'd URL into a 200 and hide broken links from us and from crawlers.
+		// `single-page-application` would be wrong here — this is a multi-file static
+		// site, not a client-routed app, and rewriting every miss to index.html would
+		// turn a typo'd URL into a 200 and hide broken links from us and from crawlers.
+		//
+		// **This setting is currently inert, and that is a known gap.** `404-page`
+		// serves the nearest `404.html` in the asset directory, and the repo has none,
+		// so a miss returns a bare 404 with an empty body — indistinguishable from
+		// `"none"`. Someone who mistypes a URL gets a blank page with no branding and
+		// no way back. The setting is kept because it is the correct destination: drop
+		// a `404.html` in the repo root and it starts working with no config change.
+		// Designing that page is tracked separately.
 		"not_found_handling": "404-page"
 	},
 

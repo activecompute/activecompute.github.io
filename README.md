@@ -46,6 +46,25 @@ One-time per machine: `npx wrangler login` (browser OAuth).
 The Worker has **no `main`** — `wrangler.jsonc` declares `assets` and no script, which Cloudflare
 serves straight from the edge. Add a script only when the site needs real request handling.
 
+The target account is **pinned** in `wrangler.jsonc` as `account_id`. Do not remove it. Wrangler
+otherwise falls back to a machine-local cache in `.wrangler/`, and that cache used to be committed
+here pointing at the old account — a deploy would have silently gone to the wrong account and left
+the apex broken. `.wrangler/` is git-ignored now.
+
+### The first deploy will ask about DNS
+
+Both `activecompute.co` and `www.activecompute.co` already have A records in the zone, left over
+from Cloudflare Pages. Attaching a Custom Domain to a hostname that already resolves makes wrangler
+stop and ask before it overwrites the record. That prompt is expected — answer yes for both. It will
+not appear again.
+
+### Known gap: there is no `404.html`
+
+`not_found_handling` is `"404-page"`, which serves the nearest `404.html` in the asset directory.
+The repo has none, so a mistyped URL currently returns a bare 404 with an empty body. The setting is
+the right destination, not a mistake: drop a `404.html` in the repo root and it starts working with
+no config change. Designing that page is its own task.
+
 ### Hosting history
 
 **Cloudflare Pages until 2026-10-01**, as project `activecompute`. Pages is no longer the path for

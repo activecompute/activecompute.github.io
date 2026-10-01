@@ -27,7 +27,16 @@ rsync -a \
 # one, so the previous `sed -i ''` form worked on a Mac and failed everywhere else. Reading
 # source and redirecting sidesteps the flag entirely and behaves the same on both.
 sed "s/?v=DEV/?v=${SHA}/g" index.html > _site/index.html
-echo "→ Stamped ?v=${SHA} × $(grep -c "?v=${SHA}" _site/index.html)"
+
+# Asserted, not just printed. `set -e` does not fire on a command substitution used as an
+# argument — `grep -c` exits 1 on no match, but the status `set -e` sees is `echo`'s, which is
+# 0. So the old one-liner would print "× 0" and deploy anyway, shipping a site with no
+# cache-busting, which is exactly the failure the stamping exists to prevent.
+STAMPS=$(grep -c "?v=${SHA}" _site/index.html || true)
+if [ "$STAMPS" -eq 0 ]; then
+  echo "✗ No ?v=DEV stamps applied — cache-busting would ship broken. Did index.html change?"; exit 1
+fi
+echo "→ Stamped ?v=${SHA} × ${STAMPS}"
 
 echo "→ Deploying Worker activecompute-site"
 npx --yes wrangler@latest deploy
