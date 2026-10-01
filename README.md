@@ -29,28 +29,54 @@ time, so there is exactly one copy of the letter to maintain.
 
 ## Deploy
 
-Hosted on **Cloudflare Pages** — project `activecompute`, direct upload, domain `activecompute.co`
-(DNS is on the same Cloudflare account, so the custom domain and its certificate are automatic).
+Hosted on **Cloudflare Workers** — Worker `activecompute-site`, static assets, domains
+`activecompute.co` and `www.activecompute.co` as Custom Domains, so Cloudflare owns both DNS records
+and both certificates.
 
 ```bash
 bash deploy.sh
 ```
 
 `deploy.sh` refuses to run with uncommitted changes (the version stamp comes from `git rev-parse`),
-stages the site into `_site/`, rewrites every `?v=DEV` in `index.html` to the git short SHA, and
-uploads with `wrangler pages deploy`. Keep `?v=DEV` in source — never commit a SHA.
+stages the site into `_site/`, writes `index.html` through `sed` so every `?v=DEV` becomes the git
+short SHA, and ships with `wrangler deploy`. Keep `?v=DEV` in source — never commit a SHA.
 
-One-time per machine: `npx wrangler login` (browser OAuth). The always-current preview is
-https://activecompute.pages.dev/.
+One-time per machine: `npx wrangler login` (browser OAuth).
 
-### GitHub Pages — parked
+The Worker has **no `main`** — `wrangler.jsonc` declares `assets` and no script, which Cloudflare
+serves straight from the edge. Add a script only when the site needs real request handling.
 
-`.github/workflows/pages.yml` is the GitHub Pages deploy and is complete, but the `activecompute`
-org has **Pages creation disabled for members**, so it is `workflow_dispatch`-only for now. To move
-hosting there later: an org owner allows Pages (Org Settings → Member privileges → Pages creation →
-Public), enable Pages on this repo with Source = **GitHub Actions**, restore the `push` trigger,
-set the custom domain in Settings → Pages, and repoint DNS to GitHub's A/AAAA records (grey cloud
-until the certificate issues).
+The target account is **pinned** in `wrangler.jsonc` as `account_id`. Do not remove it. Wrangler
+otherwise falls back to a machine-local cache in `.wrangler/`, and that cache used to be committed
+here pointing at the old account — a deploy would have silently gone to the wrong account and left
+the apex broken. `.wrangler/` is git-ignored now.
+
+### The first deploy will ask about DNS
+
+Both `activecompute.co` and `www.activecompute.co` already have A records in the zone, left over
+from Cloudflare Pages. Attaching a Custom Domain to a hostname that already resolves makes wrangler
+stop and ask before it overwrites the record. That prompt is expected — answer yes for both. It will
+not appear again.
+
+### Known gap: there is no `404.html`
+
+`not_found_handling` is `"404-page"`, which serves the nearest `404.html` in the asset directory.
+The repo has none, so a mistyped URL currently returns a bare 404 with an empty body. The setting is
+the right destination, not a mistake: drop a `404.html` in the repo root and it starts working with
+no config change. Designing that page is
+[issue #3](https://github.com/activecompute/activecompute.github.io/issues/3).
+
+### Hosting history
+
+**Cloudflare Pages until 2026-10-01**, as project `activecompute`. Pages is no longer the path for
+new work: a static site is a Worker with static assets. Moving also fixed a live outage — the zone
+had moved to the Active Compute Cloudflare account while the Pages project stayed behind in the old
+one, so `activecompute.co` was answering **403** with nothing serving it.
+
+A **GitHub Pages** workflow also existed, parked and never used: the `activecompute` org has Pages
+creation disabled for members, so it could never deploy. It and the `CNAME` file it needed were
+removed in the same change rather than left as a third hosting path nobody takes. Both are in git
+history if that decision is ever revisited.
 
 ## Conventions
 

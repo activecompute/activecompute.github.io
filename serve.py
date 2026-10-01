@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Local preview server — python's http.server plus `Cache-Control: no-store`.
 
-Assets are referenced with `?v=DEV`, which only changes at deploy time (the Pages
-workflow stamps the git SHA). Locally the query never changes, so Chrome caches
+Assets are referenced with `?v=DEV`, which only changes at deploy time (deploy.sh
+stamps the git SHA). Locally the query never changes, so Chrome caches
 styles.css / script.js heuristically and an edit looks like it did nothing. This
-server disables that. Not deployed (excluded in .github/workflows/pages.yml).
+server disables that. Not deployed (excluded by deploy.sh's rsync list).
 
     python3 serve.py            # http://localhost:4185/
     python3 serve.py 8000
